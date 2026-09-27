@@ -1,74 +1,29 @@
-# ************ Clase padre *******************
 class Botella:
-    def __init__(self, material, capacidad, forma, diseno, tapa, grabados):
-        self._material = material
-        self._capacidad = capacidad
-        self._forma = forma
-        self._diseno = diseno
-        self._tapa = tapa
-        self._grabados = grabados
+    def __init__(self, material: str, capacidad_ml: int, forma: str, tapa: str):
 
-    def get_material(self):
-        return self._material
-
-    def set_material(self, valor_nuevo):
-        self._material = valor_nuevo
+        self.material = material
+        self.forma = forma
+        self.tapa = tapa
         
-    # Capacidad
-    def get_capacidad(self):
-        return self._capacidad
 
-    def set_capacidad(self, nuevo_valor):
-        if nuevo_valor > 0:
-            self._capacidad = nuevo_valor
+        self.__capacidad_ml = capacidad_ml
+        self.__contenido_actual_ml = 0
+
+
+    def obtener_capacidad(self) -> int:
+        return self.__capacidad_ml
+
+
+    def obtener_contenido(self) -> int:
+        return self.__contenido_actual_ml
+
+    def contener_liquidos(self, cantidad_ml: int) -> str:
+        if cantidad_ml <= self.__capacidad_ml:
+            self.__contenido_actual_ml = cantidad_ml
+            return f"Se vertieron {cantidad_ml} ml de líquido en la botella."
         else:
-            print("La capacidad debe ser mayor a 0")
+            return f"Error: La cantidad supera la capacidad máxima de {self.__capacidad_ml} ml."
 
-    def get_forma(self):
-        return self._forma
-
-    def set_forma(self, valor_nuevo):
-        self._forma = valor_nuevo
-
-    def get_diseno(self):
-        return self._diseno
-
-    def set_diseno(self, valor_nuevo):
-        self._diseno = valor_nuevo
-
-
-    def get_tapa(self):
-        return self._tapa
-
-    def set_tapa(self, valor_nuevo):
-        self._tapa = valor_nuevo
-
-    def get_grabados(self):
-        return self._grabados
-
-    def set_grabados(self, valor_nuevo):
-        self._grabados = valor_nuevo
-
-    def contener_liquidos(self):
-        return f"La botella contiene hasta {self._capacidad} ml de liquido"
-
-    def facilitar_vertido(self):
-        return "La botella facilita el vertido del liquido"
-
-    def cierre_hermetico(self):
-        return f"La botella se cierra hermeticamente con tapa {self._tapa}"
-
-    def transporte(self):
-        return "La botella se puede transportar"
-
-    def manejo(self):
-        return f"La botella se maneja por su forma {self._forma}"
-
-    def compatibilidad(self):
-        return "Compatible con bebidas"
-
-    def reutilizacion(self):
-        return "La botella es reutilizable"
-
-    def transparencia(self):
-        return "La botella es Negra"
+    def vaciar(self) -> str:
+        self.__contenido_actual_ml = 0
+        return "La botella ha sido vaciada."
